@@ -16,7 +16,8 @@ const Expense = (props) => {
     <Card className="expense">
       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
       {props.items.map(expense => 
-      <ExpenseItem 
+      <ExpenseItem
+        key={expense.id} // для того, чтобы новый элемент добавлялся вначало, а не в конец
         title={expense.title} 
         amount={expense.amount}
         date={expense.date}
