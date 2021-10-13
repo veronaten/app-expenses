@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
+import ExpensesList from './ExpensesList';
 import ExpensesFilter from "./ExpensesFilter";
-import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import "./Expense.css";
 
@@ -16,25 +16,12 @@ const Expense = (props) => {
     return (expense.date.getFullYear().toString() === filteredYear);
   })
 
-  let expensesContent = <p>No expenses found.</p>;
-
-  if (filteredExpenses.length > 0) {
-    expensesContent = filteredExpenses.map((expense) => (
-      <ExpenseItem
-        key={expense.id} // для того, чтобы новый элемент добавлялся вначало, а не в конец
-        title={expense.title} 
-        amount={expense.amount}
-        date={expense.date}
-      />
-    ))
-  }
-
   return (
     <Card className="expense">
       <ExpensesFilter 
       selected={filteredYear} 
       onChangeFilter={filterChangeHandler} />
-      {expensesContent}
+      <ExpensesList items={filteredExpenses}/>
     </Card>
   )
 }
